@@ -25,7 +25,7 @@ class Canvas(
 ):  # pylint: disable=too-many-public-methods, too-many-instance-attributes
     """Canvas widget to handle label drawing"""
 
-    zoom_request = QtCore.pyqtSignal(int, QtCore.QPoint)
+    zoom_request = QtCore.pyqtSignal(int, QtCore.QPointF)
     scroll_request = QtCore.pyqtSignal(int, Qt.Orientation)
     new_shape = QtCore.pyqtSignal()
     selection_changed = QtCore.pyqtSignal(list)
@@ -441,7 +441,10 @@ class Canvas(
                     elif self.create_mode == "linestrip":
                         self.current.add_point(self.line[1])
                         self.line[0] = self.current[-1]
-                        if ev.modifiers() == QtCore.Qt.Modifier.CTRL:
+                        if (
+                            ev.modifiers()
+                            == QtCore.Qt.KeyboardModifier.ControlModifier
+                        ):
                             self.finalise()
                 elif not self.out_off_pixmap(pos):
                     # Create new shape.
@@ -461,12 +464,16 @@ class Canvas(
                     self.add_point_to_edge()
                 elif (
                     self.selected_vertex()
-                    and ev.modifiers() == QtCore.Qt.Modifier.SHIFT
+                    and ev.modifiers()
+                    == QtCore.Qt.KeyboardModifier.ShiftModifier
                 ):
                     # Delete point if: left-click + SHIFT on a point
                     self.remove_selected_point()
 
-                group_mode = ev.modifiers() == QtCore.Qt.Modifier.CTRL
+                group_mode = (
+                    ev.modifiers()
+                    == QtCore.Qt.KeyboardModifier.ControlModifier
+                )
                 self.select_shape_point(
                     pos, multiple_selection_mode=group_mode
                 )
@@ -475,7 +482,9 @@ class Canvas(
         elif (
             ev.button() == QtCore.Qt.MouseButton.RightButton and self.editing()
         ):
-            group_mode = ev.modifiers() == QtCore.Qt.Modifier.CTRL
+            group_mode = (
+                ev.modifiers() == QtCore.Qt.KeyboardModifier.ControlModifier
+            )
             if not self.selected_shapes or (
                 self.h_hape is not None
                 and self.h_hape not in self.selected_shapes
@@ -1096,7 +1105,7 @@ class Canvas(
         """Mouse wheel event"""
         mods = ev.modifiers()
         delta = ev.angleDelta()
-        if QtCore.Qt.Modifier.CTRL == mods:
+        if QtCore.Qt.KeyboardModifier.ControlModifier == mods:
             # with Ctrl/Command key
             # zoom
             self.zoom_request.emit(delta.y(), ev.position())
@@ -1129,7 +1138,7 @@ class Canvas(
                 self.update()
             elif key == QtCore.Qt.Key.Key_Return and self.can_close_shape():
                 self.finalise()
-            elif modifiers == QtCore.Qt.Modifier.ALT:
+            elif modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
                 self.snapping = False
         elif self.editing():
             if key == QtCore.Qt.Key.Key_Up:

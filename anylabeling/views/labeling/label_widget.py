@@ -2150,7 +2150,8 @@ class LabelingWidget(LabelDialog):
     def open_prev_image(self, _value=False):
         keep_prev = self._config["keep_prev"]
         if QtWidgets.QApplication.keyboardModifiers() == (
-            Qt.Modifier.CTRL | Qt.Modifier.SHIFT
+            Qt.KeyboardModifier.ControlModifier
+            | Qt.KeyboardModifier.ShiftModifier
         ):
             self._config["keep_prev"] = True
             save_config(self._config)
@@ -2176,7 +2177,8 @@ class LabelingWidget(LabelDialog):
     def open_next_image(self, _value=False, load=True):
         keep_prev = self._config["keep_prev"]
         if QtWidgets.QApplication.keyboardModifiers() == (
-            Qt.Modifier.CTRL | Qt.Modifier.SHIFT
+            Qt.KeyboardModifier.ControlModifier
+            | Qt.KeyboardModifier.ShiftModifier
         ):
             self._config["keep_prev"] = True
             save_config(self._config)
