@@ -27,93 +27,30 @@
 - **Youtube Demo:** [https://www.youtube.com/watch?v=5qVJiYNX5Kk](https://www.youtube.com/watch?v=5qVJiYNX5Kk)
 - **Documentation:** [https://anylabeling.nrl.ai](https://anylabeling.nrl.ai)
 
-**Features:**
+## Features
 
 - [x] Image annotation for polygon, rectangle, circle, line and point.
 - [x] Auto-labeling with YOLOv5 and Segment Anything.
 - [x] Text detection, recognition and KIE (Key Information Extraction) labeling.
 - [x] Multiple languages availables: English, Vietnamese, Chinese.
 
-## I. Install and run
+## Install and run
 
-### 1. Download and run executable
+### Install from PyPI
 
-- Download and run newest version from [Releases](https://github.com/vietanhdev/anylabeling/releases).
-- For MacOS:
-  - After installing, go to Applications folder
-  - Right click on the app and select Open
-  - From the second time, you can open the app normally using Launchpad
+Install the requirements:
 
-### 2. Install from Pypi
+- Python >= 3.8, < 3.13
+- Poetry
 
-- Requirements: Python >= 3.8, <= 3.10.
-- Recommended: [Miniconda/Anaconda](https://docs.conda.io/en/latest/miniconda.html).
-
-- Create environment:
+Create the environment and install dependencies:
 
 ```bash
-conda create -n anylabeling python=3.8
-conda activate anylabeling
+poetry install
 ```
 
-- **(For macOS only)** Install PyQt6 using Conda:
-
-```bash
-conda install -c conda-forge pyqt==5.15.7
-```
-
-- Install anylabeling:
-
-```bash
-pip install anylabeling # or pip install anylabeling-gpu for GPU support
-```
-
-- Start labeling:
+Start labeling:
 
 ```bash
 anylabeling
 ```
-
-## II. Development
-
-- Generate resources:
-
-```bash
-pyrcc5 -o anylabeling/resources/resources.py anylabeling/resources/resources.qrc
-```
-
-- Run app:
-
-```bash
-python anylabeling/app.py
-```
-
-## III. Build executable
-
-- Install PyInstaller:
-
-```bash
-pip install -r requirements-dev.txt
-```
-
-- Build:
-
-```bash
-bash build_executable.sh
-```
-
-- Check the outputs in: `dist/`.
-
-## IV. Contribution
-
-If you want to contribute to **AnyLabeling**, please read [Contribution Guidelines](https://anylabeling.nrl.ai/docs/contribution).
-
-## V. Star history
-
-[![Star History Chart](https://api.star-history.com/svg?repos=vietanhdev/anylabeling&type=Date)](https://star-history.com/#vietanhdev/anylabeling&Date)
-
-## VI. References
-
-- Labeling UI built with ideas and components from [LabelImg](https://github.com/heartexlabs/labelImg), [LabelMe](https://github.com/wkentaro/labelme).
-- Auto-labeling with [Segment Anything Models](https://segment-anything.com/), [MobileSAM](https://github.com/ChaoningZhang/MobileSAM).
-- Auto-labeling with [YOLOv5](https://github.com/ultralytics/yolov5), [YOLOv8](https://github.com/ultralytics/ultralytics).
