@@ -37,9 +37,6 @@ qimage2ndarray = "^1.10.0"
 [tool.poetry.scripts]
 anylabeling = "anylabeling.app:main"
 
-[tool.poetry.group.dev.dependencies]
-pyinstaller = "^5.13.0"
-
 [tool.black]
 line-length = 79
 exclude = '''
