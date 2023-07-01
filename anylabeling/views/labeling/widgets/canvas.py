@@ -638,10 +638,10 @@ class Canvas(
             return False  # No need to move
         o1 = pos + self.offsets[0]
         if self.out_off_pixmap(o1):
-            pos -= QtCore.QPoint(min(0, int(o1.x())), min(0, int(o1.y())))
+            pos -= QtCore.QPointF(min(0, int(o1.x())), min(0, int(o1.y())))
         o2 = pos + self.offsets[1]
         if self.out_off_pixmap(o2):
-            pos += QtCore.QPoint(
+            pos += QtCore.QPointF(
                 min(0, int(self.pixmap.width() - o2.x())),
                 min(0, int(self.pixmap.height() - o2.y())),
             )
