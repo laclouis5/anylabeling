@@ -26,7 +26,7 @@ class Canvas(
     """Canvas widget to handle label drawing"""
 
     zoom_request = QtCore.pyqtSignal(int, QtCore.QPoint)
-    scroll_request = QtCore.pyqtSignal(int, int)
+    scroll_request = QtCore.pyqtSignal(int, Qt.Orientation)
     new_shape = QtCore.pyqtSignal()
     selection_changed = QtCore.pyqtSignal(list)
     shape_moved = QtCore.pyqtSignal()
@@ -1099,7 +1099,7 @@ class Canvas(
         if QtCore.Qt.Modifier.CTRL == mods:
             # with Ctrl/Command key
             # zoom
-            self.zoom_request.emit(delta.y(), ev.pos())
+            self.zoom_request.emit(delta.y(), ev.position())
         else:
             # scroll
             self.scroll_request.emit(
