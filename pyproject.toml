@@ -1,20 +1,61 @@
+[tool.poetry]
+name = "anylabeling"
+version = "0.3.2"
+authors = ["Viet-Anh Nguyen <vietanh.dev@gmail.com>"]
+license = "GPLv3"
+packages = [{ include = "anylabeling" }]
+readme = "README.md"
+description = "Effortless data labeling with AI support"
+homepage = "https://github.com/vietanhdev/anylabeling"
+repository = "https://github.com/vietanhdev/anylabeling"
+keywords = ["Image Annotation", "Machine Learning", "Deep Learning"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+[tool.poetry.dependencies]
+python = "^3.9 <3.13"
+numpy = "<1.25"
+pillow = "^10.0.0"
+opencv-python-headless = "^4.8.0.74"
+pyqt6 = "^6.5.1"
+onnx = "^1.14.0"
+onnxruntime = "^1.15.1"
+pyyaml = "^6.0"
+termcolor = "^2.3.0"
+imgviz = "^1.7.2"
+natsort = "^8.4.0"
+qimage2ndarray = "^1.10.0"
+
+[tool.poetry.scripts]
+anylabeling = "anylabeling.app:main"
+
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^5.13.0"
+
 [tool.black]
 line-length = 79
-#include = '\.pyi?$'
 exclude = '''
 /(
     \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
 )/
 '''
 
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
