@@ -234,7 +234,9 @@ class LabelDialog(QtWidgets.QDialog):
             self.edit_group_id.clear()
         else:
             self.edit_group_id.setText(str(group_id))
-        items = self.label_list.findItems(text, QtCore.Qt.MatchFlag.MatchFixedString)
+        items = self.label_list.findItems(
+            text, QtCore.Qt.MatchFlag.MatchFixedString
+        )
         if items:
             if len(items) != 1:
                 logger.warning("Label list has duplicate '%s'", text)

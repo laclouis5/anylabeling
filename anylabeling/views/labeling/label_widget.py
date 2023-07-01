@@ -1587,7 +1587,7 @@ class LabelingWidget(LabelDialog):
             for x, y in points:
                 shape.add_point(QtCore.QPointF(x, y))
             shape.close()
-
+ 
             default_flags = {}
             if self._config["label_flags"]:
                 for pattern, keys in self._config["label_flags"].items():

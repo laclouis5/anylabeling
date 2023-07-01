@@ -43,6 +43,8 @@ class ToolBar(QtWidgets.QToolBar):
             if isinstance(
                 self.layout().itemAt(i).widget(), QtWidgets.QToolButton
             ):
-                self.layout().itemAt(i).setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                self.layout().itemAt(i).setAlignment(
+                    QtCore.Qt.AlignmentFlag.AlignCenter
+                )
 
         return True

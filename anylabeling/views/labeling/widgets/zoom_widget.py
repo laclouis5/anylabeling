@@ -4,7 +4,9 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class ZoomWidget(QtWidgets.QSpinBox):
     def __init__(self, value=100):
         super().__init__()
-        self.setButtonSymbols(QtWidgets.QAbstractSpinBox.ButtonSymbols.NoButtons)
+        self.setButtonSymbols(
+            QtWidgets.QAbstractSpinBox.ButtonSymbols.NoButtons
+        )
         self.setRange(1, 1000)
         self.setSuffix("%")
         self.setValue(value)
