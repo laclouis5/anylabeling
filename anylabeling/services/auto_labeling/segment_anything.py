@@ -106,7 +106,9 @@ class SegmentAnything(Model):
         """
         # Find contours
         contours, _ = cv2.findContours(
-            masks.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
+            (masks > 0).astype(np.uint8),
+            cv2.RETR_EXTERNAL,
+            cv2.CHAIN_APPROX_NONE,
         )
 
         # Refine contours
