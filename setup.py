@@ -42,7 +42,7 @@ def get_install_requires():
         "termcolor",
         "opencv-python-headless",
         "PyQt6>=6.5",
-        "onnx>=1.14",
+        "onnx==1.13.1",
         "qimage2ndarray==1.10.0",
     ]
 
@@ -50,12 +50,12 @@ def get_install_requires():
     # otherwise, add onnxruntime.
     # Note: onnxruntime-gpu is not available on macOS
     preferred_device = get_preferred_device()
-    if platform.system() == "Darwin":
-        install_requires.append("onnxruntime-silicon==1.14.1")
-        print("Building AnyLabeling with GPU support")
-    elif preferred_device == "GPU":
+    if preferred_device == "GPU":
         install_requires.append("onnxruntime-gpu==1.14.1")
         print("Building AnyLabeling with GPU support")
+    # elif platform.system() == "Darwin":
+    #     install_requires.append("onnxruntime-silicon==1.14.1")
+    #     print("Building AnyLabeling with GPU support")
     else:
         install_requires.append("onnxruntime==1.14.1")
         print("Building AnyLabeling without GPU support")
