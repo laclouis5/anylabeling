@@ -86,7 +86,7 @@ jobs:
       run: |
         pip install .
 
-    - name: Install PyQt5 for macOS
+    - name: Install PyQt6 for macOS
       shell: bash -l {0}
       run: |
         conda install -c conda-forge pyqt==5.15.7
@@ -181,7 +181,7 @@ jobs:
       run: |
         pip install .
 
-    - name: Install PyQt5 for macOS
+    - name: Install PyQt6 for macOS
       shell: bash -l {0}
       run: |
         conda install -c conda-forge pyqt==5.15.7

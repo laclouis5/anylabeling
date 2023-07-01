@@ -1,7 +1,7 @@
 import re
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QCoreApplication
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import QCoreApplication
 
 from .. import utils
 from ..logger import logger
@@ -20,7 +20,7 @@ class LabelQLineEdit(QtWidgets.QLineEdit):
 
     # QT Overload
     def keyPressEvent(self, e):
-        if e.key() in [QtCore.Qt.Key_Up, QtCore.Qt.Key_Down]:
+        if e.key() in [QtCore.Qt.Key.Key_Up, QtCore.Qt.Key.Key_Down]:
             self.list_widget.keyPressEvent(e)
         else:
             super(LabelQLineEdit, self).keyPressEvent(e)
@@ -70,12 +70,13 @@ class LabelDialog(QtWidgets.QDialog):
             layout.addLayout(layout_edit)
         # buttons
         self.button_box = bb = QtWidgets.QDialogButtonBox(
-            QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel,
-            QtCore.Qt.Horizontal,
+            QtWidgets.QDialogButtonBox.StandardButton.Ok
+            | QtWidgets.QDialogButtonBox.StandardButton.Cancel,
+            QtCore.Qt.Orientation.Horizontal,
             self,
         )
-        bb.button(bb.Ok).setIcon(utils.new_icon("done"))
-        bb.button(bb.Cancel).setIcon(utils.new_icon("undo"))
+        bb.button(bb.StandardButton.Ok).setIcon(utils.new_icon("done"))
+        bb.button(bb.StandardButton.Cancel).setIcon(utils.new_icon("undo"))
         bb.accepted.connect(self.validate)
         bb.rejected.connect(self.reject)
         layout.addWidget(bb)
@@ -83,11 +84,11 @@ class LabelDialog(QtWidgets.QDialog):
         self.label_list = QtWidgets.QListWidget()
         if self._fit_to_content["row"]:
             self.label_list.setHorizontalScrollBarPolicy(
-                QtCore.Qt.ScrollBarAlwaysOff
+                QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff
             )
         if self._fit_to_content["column"]:
             self.label_list.setVerticalScrollBarPolicy(
-                QtCore.Qt.ScrollBarAlwaysOff
+                QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff
             )
         self._sort_labels = sort_labels
         if labels:
@@ -114,12 +115,16 @@ class LabelDialog(QtWidgets.QDialog):
         # completion
         completer = QtWidgets.QCompleter()
         if completion == "startswith":
-            completer.setCompletionMode(QtWidgets.QCompleter.InlineCompletion)
+            completer.setCompletionMode(
+                QtWidgets.QCompleter.CompletionMode.InlineCompletion
+            )
             # Default settings.
             # completer.setFilterMode(QtCore.Qt.MatchStartsWith)
         elif completion == "contains":
-            completer.setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
-            completer.setFilterMode(QtCore.Qt.MatchContains)
+            completer.setCompletionMode(
+                QtWidgets.QCompleter.CompletionMode.PopupCompletion
+            )
+            completer.setFilterMode(QtCore.Qt.MatchFlag.MatchContains)
         else:
             raise ValueError(f"Unsupported completion: {completion}")
         completer.setModel(self.label_list.model())
@@ -132,7 +137,7 @@ class LabelDialog(QtWidgets.QDialog):
 
     def add_label_history(self, label):
         self._last_label = label
-        if self.label_list.findItems(label, QtCore.Qt.MatchExactly):
+        if self.label_list.findItems(label, QtCore.Qt.MatchFlag.MatchExactly):
             return
         self.label_list.addItem(label)
         if self._sort_labels:
@@ -229,17 +234,17 @@ class LabelDialog(QtWidgets.QDialog):
             self.edit_group_id.clear()
         else:
             self.edit_group_id.setText(str(group_id))
-        items = self.label_list.findItems(text, QtCore.Qt.MatchFixedString)
+        items = self.label_list.findItems(text, QtCore.Qt.MatchFlag.MatchFixedString)
         if items:
             if len(items) != 1:
                 logger.warning("Label list has duplicate '%s'", text)
             self.label_list.setCurrentItem(items[0])
             row = self.label_list.row(items[0])
             self.edit.completer().setCurrentRow(row)
-        self.edit.setFocus(QtCore.Qt.PopupFocusReason)
+        self.edit.setFocus(QtCore.Qt.FocusReason.PopupFocusReason)
         if move:
             self.move(QtGui.QCursor.pos())
-        if self.exec_():
+        if self.exec():
             return self.edit.text(), self.get_flags(), self.get_group_id()
 
         return None, None, None

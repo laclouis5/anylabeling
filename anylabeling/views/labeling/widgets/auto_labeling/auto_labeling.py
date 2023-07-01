@@ -1,8 +1,8 @@
 import os
 
-from PyQt5 import uic
-from PyQt5.QtCore import pyqtSignal, pyqtSlot
-from PyQt5.QtWidgets import QWidget, QFileDialog
+from PyQt6 import uic
+from PyQt6.QtCore import pyqtSignal, pyqtSlot
+from PyQt6.QtWidgets import QWidget, QFileDialog
 
 from anylabeling.services.auto_labeling.model_manager import ModelManager
 from anylabeling.services.auto_labeling.types import AutoLabelingMode
@@ -229,7 +229,7 @@ class AutoLabelingWidget(QWidget):
             file_dialog = QFileDialog(self)
             file_dialog.setFileMode(QFileDialog.ExistingFile)
             file_dialog.setNameFilter("Config file (*.yaml)")
-            if file_dialog.exec_():
+            if file_dialog.exec():
                 config_file = file_dialog.selectedFiles()[0]
                 # Disable combobox while loading model
                 if config_path:

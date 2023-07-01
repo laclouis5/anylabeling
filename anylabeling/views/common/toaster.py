@@ -1,6 +1,6 @@
 """Defines Toaster widget"""
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class QToaster(QtWidgets.QFrame):

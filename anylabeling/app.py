@@ -13,7 +13,7 @@ import logging
 import sys
 
 import yaml
-from PyQt5 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 
 from anylabeling.app_info import __appname__
 from anylabeling.config import get_config
@@ -171,14 +171,9 @@ def main():
         ":/languages/translations/" + language + ".qm"
     )
 
-    # Enable scaling for high dpi screens
-    QtWidgets.QApplication.setAttribute(
-        QtCore.Qt.AA_EnableHighDpiScaling, True
-    )  # enable highdpi scaling
-    QtWidgets.QApplication.setAttribute(
-        QtCore.Qt.AA_UseHighDpiPixmaps, True
-    )  # use highdpi icons
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
+    QtCore.QCoreApplication.setAttribute(
+        QtCore.Qt.ApplicationAttribute.AA_ShareOpenGLContexts
+    )
 
     app = QtWidgets.QApplication(sys.argv)
     app.processEvents()

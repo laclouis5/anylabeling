@@ -31,15 +31,6 @@ def get_preferred_device():
     return device
 
 
-def get_package_name():
-    """Get package name based on context"""
-    package_name = "anylabeling"
-    preferred_device = get_preferred_device()
-    if preferred_device == "GPU" and platform.system() != "Darwin":
-        package_name = "anylabeling-gpu"
-    return package_name
-
-
 def get_install_requires():
     """Get python requirements based on context"""
     install_requires = [
@@ -50,8 +41,8 @@ def get_install_requires():
         "PyYAML",
         "termcolor",
         "opencv-python-headless",
-        'PyQt5>=5.15.7; platform_system != "Darwin"',
-        "onnx==1.13.1",
+        "PyQt6>=6.5",
+        "onnx>=1.14",
         "qimage2ndarray==1.10.0",
     ]
 
@@ -59,7 +50,10 @@ def get_install_requires():
     # otherwise, add onnxruntime.
     # Note: onnxruntime-gpu is not available on macOS
     preferred_device = get_preferred_device()
-    if preferred_device == "GPU" and platform.system() != "Darwin":
+    if platform.system() == "Darwin":
+        install_requires.append("onnxruntime-silicon==1.14.1")
+        print("Building AnyLabeling with GPU support")
+    elif preferred_device == "GPU":
         install_requires.append("onnxruntime-gpu==1.14.1")
         print("Building AnyLabeling with GPU support")
     else:
@@ -77,7 +71,7 @@ def get_long_description():
 
 
 setup(
-    name=get_package_name(),
+    name="anylabeling",
     version=get_version(),
     packages=find_packages(),
     description="Effortless data labeling with AI support",
