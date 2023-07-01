@@ -7,9 +7,7 @@
 - [x] Text detection, recognition and KIE (Key Information Extraction) labeling.
 - [x] Multiple languages availables: English, Vietnamese, Chinese.
 
-## Install and run
-
-### Install from PyPI
+## Install and Run
 
 Install the requirements:
 
